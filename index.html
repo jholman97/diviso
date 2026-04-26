@@ -1,1 +1,323 @@
+<!doctype html>
+<html lang="es" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Escuela Rural Mixta El Diviso</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Quicksand', sans-serif; margin: 0; }
+    .font-title { font-family: 'Fredoka', sans-serif; }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    .float { animation: float 3s ease-in-out infinite; }
+    .pop-in { animation: popIn 0.4s ease-out forwards; }
+    @keyframes popIn { from{transform:scale(0.95);opacity:0} to{transform:scale(1);opacity:1} }
+    .subject-card { transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; }
+    .subject-card:hover { transform: translateY(-8px) scale(1.05); }
+    .quiz-option { transition: all 0.2s ease; cursor: pointer; border: 2px solid #e2e8f0; background: white; }
+    .quiz-option:hover { background-color: #f8fafc; border-color: #94a3b8; }
+    .quiz-option.selected { border-color: #7c3aed; background-color: #f5f3ff; color: #7c3aed; font-weight: bold; }
+  </style>
+</head>
+<body class="h-full flex flex-col">
+  <div id="app" class="flex-grow w-full overflow-auto relative" style="background: linear-gradient(135deg, #fef3c7 0%, #fce7f3 30%, #ddd6fe 60%, #cffafe 100%);">
+    
+    <header class="relative z-10 text-center pt-10 pb-6 px-4">
+      <div class="float inline-block mb-4">
+        <img src="2.png" alt="Logo Escuela Rural Mixta El Diviso" class="w-32 h-32 mx-auto drop-shadow-2xl rounded-full border-4 border-white">
+      </div>
+      <h1 class="font-title text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-600 via-blue-600 to-purple-600">
+        Escuela Rural Mixta El Diviso
+      </h1>
+      <p class="text-indigo-700 mt-2 font-medium text-lg italic">"Sembrando conocimiento, cosechando futuro"</p>
+    </header>
 
+    <main class="relative z-10 px-4 pb-16 max-w-5xl mx-auto">
+      
+      <section id="loginView" class="max-w-md mx-auto pop-in">
+        <div class="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white">
+          <h2 class="font-title text-2xl font-bold text-center text-violet-700 mb-6">¡Hola, Estudiante!</h2>
+          <div class="space-y-4">
+            <input id="studentName" type="text" placeholder="Ingresa tu nombre completo" class="w-full px-5 py-4 rounded-2xl border-2 border-violet-200 focus:border-violet-500 focus:outline-none text-lg text-center">
+            <button onclick="goToHome()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-2xl transition-all shadow-lg flex items-center justify-center gap-2">
+              Ingresar a Clases <i data-lucide="book-open"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="homeView" class="hidden">
+        <h2 class="text-center font-bold text-indigo-900 mb-6 uppercase tracking-wider text-xl">Selecciona una Materia</h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+          <div class="subject-card bg-white p-6 rounded-3xl shadow-lg border-b-8 border-blue-500 text-center" onclick="startSubject('Matemáticas')">
+            <div class="text-5xl mb-3">➕</div><h3 class="font-bold text-blue-800">MATEMÁTICAS</h3>
+          </div>
+          <div class="subject-card bg-white p-6 rounded-3xl shadow-lg border-b-8 border-red-500 text-center" onclick="startSubject('Español')">
+            <div class="text-5xl mb-3">📖</div><h3 class="font-bold text-red-800">ESPAÑOL</h3>
+          </div>
+          <div class="subject-card bg-white p-6 rounded-3xl shadow-lg border-b-8 border-green-500 text-center" onclick="startSubject('Ciencias Naturales')">
+            <div class="text-5xl mb-3">🌿</div><h3 class="font-bold text-green-800">CIENCIAS NATURALES</h3>
+          </div>
+          <div class="subject-card bg-white p-6 rounded-3xl shadow-lg border-b-8 border-orange-500 text-center" onclick="startSubject('Sociales')">
+            <div class="text-5xl mb-3">🌎</div><h3 class="font-bold text-orange-800">SOCIALES</h3>
+          </div>
+          <div class="subject-card bg-white p-6 rounded-3xl shadow-lg border-b-8 border-pink-500 text-center" onclick="startSubject('Ética y Valores')">
+            <div class="text-5xl mb-3">🤝</div><h3 class="font-bold text-pink-800">ÉTICA Y VALORES</h3>
+          </div>
+          <div class="subject-card bg-white p-6 rounded-3xl shadow-lg border-b-8 border-yellow-500 text-center" onclick="startSubject('Religión')">
+            <div class="text-5xl mb-3">🙏</div><h3 class="font-bold text-yellow-800">RELIGIÓN</h3>
+          </div>
+          <div class="subject-card bg-white p-6 rounded-3xl shadow-lg border-b-8 border-indigo-500 text-center" onclick="startSubject('Educación Física')">
+            <div class="text-5xl mb-3">⚽</div><h3 class="font-bold text-indigo-800">ED. FÍSICA</h3>
+          </div>
+          <div class="subject-card bg-white p-6 rounded-3xl shadow-lg border-b-8 border-gray-500 text-center" onclick="startSubject('Tecnología')">
+            <div class="text-5xl mb-3">💻</div><h3 class="font-bold text-gray-800">SISTEMAS</h3>
+          </div>
+          <div class="subject-card bg-white p-6 rounded-3xl shadow-lg border-b-8 border-purple-500 text-center" onclick="startSubject('Inglés')">
+            <div class="text-5xl mb-3">🇺🇸</div><h3 class="font-bold text-purple-800">INGLÉS</h3>
+          </div>
+        </div>
+      </section>
+
+      <section id="quizView" class="hidden max-w-2xl mx-auto">
+        <div class="flex justify-between items-center mb-6">
+          <button onclick="backToHome()" class="flex items-center text-white font-bold bg-indigo-600 px-4 py-2 rounded-xl shadow-md hover:bg-indigo-700 transition-colors">
+            <i data-lucide="home" class="mr-2"></i> Ir al Inicio
+          </button>
+          <div class="bg-white px-4 py-2 rounded-xl font-bold text-indigo-800 border-2 border-indigo-100">
+            Materia: <span id="currentSubjectTitle"></span>
+          </div>
+        </div>
+        
+        <div class="bg-white p-8 rounded-[2rem] shadow-2xl border-4 border-white">
+          <div id="quizContent"></div>
+          <button id="nextBtn" onclick="nextQuestion()" class="mt-8 w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-2xl hidden shadow-lg text-xl">
+            Siguiente Pregunta ➔
+          </button>
+        </div>
+      </section>
+
+      <section id="resultView" class="hidden max-w-md mx-auto text-center pop-in">
+        <div class="bg-white p-10 rounded-[3rem] shadow-2xl border-2 border-indigo-50">
+          <div class="text-7xl mb-6">🥇</div>
+          <h2 class="font-title text-3xl font-bold text-indigo-800 mb-2">¡Excelente Trabajo!</h2>
+          <p id="resultStudentName" class="text-2xl font-bold text-green-600 mb-4"></p>
+          <div class="bg-indigo-50 p-6 rounded-3xl mb-8">
+            <p class="text-gray-600">Tu calificación en <span id="resultSubject" class="font-bold"></span> es:</p>
+            <p id="scoreDisplay" class="text-6xl font-black text-indigo-600">0 / 10</p>
+          </div>
+          <button onclick="backToHome()" class="w-full bg-indigo-600 text-white font-bold py-4 rounded-2xl shadow-lg">Intentar otra materia</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-white/70 backdrop-blur-md border-t-4 border-green-500 py-8 px-4 text-center">
+      <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="text-left">
+          <h3 class="font-title text-xl font-bold text-green-700">Escuela Rural Mixta El Diviso</h3>
+          <p class="text-sm text-gray-600">Comprometidos con la excelencia educativa rural.</p>
+        </div>
+        <div class="flex gap-4">
+           <div class="bg-blue-100 p-2 rounded-full"><i data-lucide="map-pin" class="text-blue-600"></i></div>
+           <div class="bg-red-100 p-2 rounded-full"><i data-lucide="graduation-cap" class="text-red-600"></i></div>
+           <div class="bg-green-100 p-2 rounded-full"><i data-lucide="users" class="text-green-600"></i></div>
+        </div>
+        <div class="text-right text-xs text-gray-500">
+          © 2026 - Todos los derechos reservados <br>
+          Diseñado para estudiantes de Primaria.
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // BANCO DE DATOS: 10 PREGUNTAS POR MATERIA
+    const QUESTIONS_DB = {
+      "Matemáticas": [
+        { q: "¿Cuánto es 25 + 15?", o: ["30", "40", "45", "35"], a: 1 },
+        { q: "¿Cuánto es 100 - 45?", o: ["55", "45", "65", "50"], a: 0 },
+        { q: "¿Qué número sigue: 5, 10, 15, 20...?", o: ["21", "30", "25", "35"], a: 2 },
+        { q: "¿Cuánto es 7 x 8?", o: ["54", "56", "64", "49"], a: 1 },
+        { q: "¿Cuál es la mitad de 50?", o: ["20", "30", "25", "15"], a: 2 },
+        { q: "¿Cuántos minutos tiene una hora?", o: ["100", "60", "30", "12"], a: 1 },
+        { q: "¿Qué figura tiene 4 lados iguales?", o: ["Triángulo", "Círculo", "Cuadrado", "Rombo"], a: 2 },
+        { q: "¿Cuánto es 9 x 3?", o: ["27", "18", "30", "24"], a: 0 },
+        { q: "¿Cómo se llama el ángulo de 90 grados?", o: ["Agudo", "Obtuso", "Recto", "Plano"], a: 2 },
+        { q: "¿Cuánto es 12 dividido en 2?", o: ["4", "5", "6", "8"], a: 2 }
+      ],
+      "Español": [
+        { q: "¿Cuál es el sinónimo de 'hermoso'?", o: ["Feo", "Grande", "Bello", "Rápido"], a: 2 },
+        { q: "¿Cuál es el antónimo de 'subir'?", o: ["Correr", "Bajar", "Saltar", "Mirar"], a: 1 },
+        { q: "¿Qué palabra es un sustantivo propio?", o: ["casa", "perro", "Colombia", "mesa"], a: 2 },
+        { q: "¿Cuál es el verbo en: 'El niño juega'?", o: ["El", "Niño", "Juega", "No hay"], a: 2 },
+        { q: "¿Cómo se escribe correctamente?", o: ["Haber", "Aber", "Haver", "Aver"], a: 0 },
+        { q: "¿Qué signo indica el final de un texto?", o: ["Coma", "Punto final", "Guion", "Dos puntos"], a: 1 },
+        { q: "¿Cuál es una palabra aguda?", o: ["Lápiz", "Canción", "Mesa", "Libro"], a: 1 },
+        { q: "¿Cuántas sílabas tiene 'computador'?", o: ["3", "4", "2", "5"], a: 1 },
+        { q: "Un conjunto de oraciones forma un...", o: ["Dibujo", "Párrafo", "Título", "Verso"], a: 1 },
+        { q: "¿Cuál es el plural de 'pez'?", o: ["Pezes", "Peces", "Pezs", "Pezitos"], a: 1 }
+      ],
+      "Ciencias Naturales": [
+        { q: "¿Qué parte de la planta realiza la fotosíntesis?", o: ["Raíz", "Tallo", "Hojas", "Flor"], a: 2 },
+        { q: "¿Cuál es un animal invertebrado?", o: ["Perro", "Mariposa", "Pez", "Gato"], a: 1 },
+        { q: "¿Cuál es el planeta más grande del sistema solar?", o: ["Tierra", "Marte", "Júpiter", "Saturno"], a: 2 },
+        { q: "¿En qué estado está el hielo?", o: ["Líquido", "Gaseoso", "Sólido", "Plasmático"], a: 2 },
+        { q: "¿Cómo se llama el proceso de gusano a mariposa?", o: ["Crecimiento", "Metamorfosis", "Salto", "Cambio"], a: 1 },
+        { q: "¿Qué órgano bombea la sangre?", o: ["Pulmón", "Cerebro", "Corazón", "Hígado"], a: 2 },
+        { q: "¿Cuál es un recurso natural renovable?", o: ["Petróleo", "Agua", "Oro", "Carbón"], a: 1 },
+        { q: "¿Qué animal es un anfibio?", o: ["Cocodrilo", "Rana", "Tiburón", "Águila"], a: 1 },
+        { q: "¿Por dónde respiran los peces?", o: ["Nariz", "Pulmones", "Branquias", "Piel"], a: 2 },
+        { q: "¿Cuál es el satélite natural de la Tierra?", o: ["Sol", "Marte", "Luna", "Estrella"], a: 2 }
+      ],
+      "Sociales": [
+        { q: "¿Quién descubrió América?", o: ["Simón Bolívar", "Cristóbal Colón", "Polo", "Napoleón"], a: 1 },
+        { q: "¿Cuál es el río más largo del mundo?", o: ["Magdalena", "Nilo", "Amazonas", "Cauca"], a: 2 },
+        { q: "¿Cuántos departamentos tiene Colombia?", o: ["30", "31", "32", "33"], a: 2 },
+        { q: "¿Cuál es el color de la paz en la bandera?", o: ["Amarillo", "Azul", "Rojo", "No hay"], a: 1 },
+        { q: "¿Qué es una montaña?", o: ["Llanura", "Elevación de tierra", "Río", "Mar"], a: 1 },
+        { q: "¿Cuál es el país vecino al norte de Colombia?", o: ["Panamá", "Brasil", "Perú", "Chile"], a: 0 },
+        { q: "¿Quién liberó a Colombia?", o: ["Simón Bolívar", "Santander", "Nariño", "Todos"], a: 0 },
+        { q: "¿Qué es el mapa?", o: ["Un dibujo", "Representación de la tierra", "Una foto", "Un juguete"], a: 1 },
+        { q: "¿Cuál es la lengua oficial de Colombia?", o: ["Inglés", "Español", "Francés", "Alemán"], a: 1 },
+        { q: "¿Dónde sale el sol?", o: ["Norte", "Sur", "Oriente (Este)", "Occidente"], a: 2 }
+      ],
+      "Ética y Valores": [
+        { q: "¿Qué es la empatía?", o: ["Gritar", "Ponerse en el lugar del otro", "Ignorar", "Pelear"], a: 1 },
+        { q: "¿Cuál es un valor fundamental en la familia?", o: ["Odio", "Respeto", "Mentira", "Pereza"], a: 1 },
+        { q: "¿Qué debemos hacer con el agua?", o: ["Desperdiciarla", "Cuidarla", "Ensuciarla", "Jugar con ella"], a: 1 },
+        { q: "Ser puntual significa...", o: ["Llegar tarde", "Llegar a tiempo", "No ir", "Dormir más"], a: 1 },
+        { q: "La solidaridad es...", o: ["No compartir", "Ayudar a los demás", "Criticar", "Mandar"], a: 1 },
+        { q: "¿Qué es el bullying?", o: ["Jugar", "Acoso escolar", "Aprender", "Cantar"], a: 1 },
+        { q: "Pedir el favor y dar las gracias es...", o: ["Malo", "De buena educación", "Innecesario", "Raro"], a: 1 },
+        { q: "¿Qué es la justicia?", o: ["Dar a cada quien lo que merece", "Quitar todo", "Mentir", "Ganar siempre"], a: 0 },
+        { q: "Escuchar a los demás es...", o: ["Perder tiempo", "Un acto de respeto", "Aburrido", "Malo"], a: 1 },
+        { q: "Cuidar los pupitres es...", o: ["Responsabilidad de todos", "Solo del profesor", "De nadie", "Mal"], a: 0 }
+      ],
+      "Religión": [
+        { q: "¿En qué ciudad nació Jesús?", o: ["Nazaret", "Belén", "Jerusalén", "Roma"], a: 1 },
+        { q: "¿Cuántos discípulos tenía Jesús?", o: ["10", "11", "12", "13"], a: 2 },
+        { q: "¿Qué significa el símbolo de la paloma?", o: ["Guerra", "Paz / Espíritu Santo", "Hambre", "Viaje"], a: 1 },
+        { q: "¿Quién fue el hombre que abrió el Mar Rojo?", o: ["David", "Noé", "Moisés", "Abraham"], a: 2 },
+        { q: "¿Cuál es el primer libro de la Biblia?", o: ["Éxodo", "Mateo", "Génesis", "Apocalipsis"], a: 2 },
+        { q: "¿Quién venció al gigante Goliat?", o: ["Sansón", "David", "Salomón", "Saúl"], a: 1 },
+        { q: "¿Qué mandamiento dice 'Honrarás a tu padre y a tu madre'?", o: ["Primero", "Cuarto", "Quinto", "Décimo"], a: 1 },
+        { q: "¿Cómo se llama la oración que enseñó Jesús?", o: ["Ave María", "Padre Nuestro", "Credo", "Gloria"], a: 1 },
+        { q: "¿Qué animal tentó a Eva?", o: ["León", "Serpiente", "Mono", "Águila"], a: 1 },
+        { q: "¿Cuál es el mandamiento más importante?", o: ["No matar", "Amar a Dios y al prójimo", "No robar", "Ir a misa"], a: 1 }
+      ],
+      "Educación Física": [
+        { q: "¿Qué es el calentamiento?", o: ["Sentarse", "Preparar el cuerpo", "Comer", "Dormir"], a: 1 },
+        { q: "¿Cuántos tiempos tiene un partido de fútbol?", o: ["1", "2", "3", "4"], a: 1 },
+        { q: "¿Qué capacidad usamos para estirarnos?", o: ["Fuerza", "Flexibilidad", "Velocidad", "Resistencia"], a: 1 },
+        { q: "¿Cuál es un deporte individual?", o: ["Fútbol", "Natación", "Baloncesto", "Voleibol"], a: 1 },
+        { q: "¿Para qué sirve el pulso?", o: ["Para oír", "Para medir latidos", "Para ver", "Para saltar"], a: 1 },
+        { q: "¿Qué elemento usamos en el baloncesto?", o: ["Bate", "Raqueta", "Balón", "Guante"], a: 2 },
+        { q: "¿Cuál es la distancia de una maratón?", o: ["10km", "21km", "42km", "5km"], a: 2 },
+        { q: "Hacer ejercicio ayuda a...", o: ["Enfermarse", "Fortalecer el corazón", "Estar triste", "No crecer"], a: 1 },
+        { q: "¿Qué es el atletismo?", o: ["Correr, saltar y lanzar", "Solo jugar fútbol", "Bailar", "Nadar"], a: 0 },
+        { q: "¿Qué calzado es ideal para deporte?", o: ["Botas", "Sandalias", "Tenis", "Zapatos de cuero"], a: 2 }
+      ],
+      "Tecnología": [
+        { q: "¿Qué significa la sigla TIC?", o: ["Tecnologías de la Información", "Tren de Ideas", "Todo en Computación", "Técnicas de Internet"], a: 0 },
+        { q: "¿Cuál es la función del antivirus?", o: ["Dañar el PC", "Proteger el equipo", "Limpiar el teclado", "Ver videos"], a: 1 },
+        { q: "¿Qué tecla se usa para borrar?", o: ["Enter", "Backspace / Borrar", "Espacio", "Shift"], a: 1 },
+        { q: "¿Cuál es una red social?", o: ["Calculadora", "Facebook", "Word", "Excel"], a: 1 },
+        { q: "¿Para qué sirve el puerto USB?", o: ["Para conectar dispositivos", "Para prender el monitor", "Para oír radio", "Para nada"], a: 0 },
+        { q: "¿Qué es el hardware?", o: ["Los programas", "Las partes físicas", "El internet", "Los juegos"], a: 1 },
+        { q: "¿Qué es Google?", o: ["Un buscador", "Un juego", "Una marca de mouse", "Un virus"], a: 0 },
+        { q: "¿Para qué sirve el correo electrónico?", o: ["Para jugar", "Para enviar mensajes", "Para ver TV", "Para imprimir"], a: 1 },
+        { q: "El icono de una 'lupa' significa...", o: ["Borrar", "Buscar", "Imprimir", "Guardar"], a: 1 },
+        { q: "¿Cuál es una regla de seguridad en internet?", o: ["Dar mi clave a todos", "No hablar con extraños", "Poner fotos de otros", "Gritar"], a: 1 }
+      ],
+      "Inglés": [
+        { q: "¿Cómo se dice 'Hermano'?", o: ["Sister", "Brother", "Father", "Mother"], a: 1 },
+        { q: "¿Qué número es 'Eight'?", o: ["6", "7", "8", "9"], a: 2 },
+        { q: "¿Cómo se dice 'Amarillo'?", o: ["Blue", "Yellow", "Red", "Green"], a: 1 },
+        { q: "¿Qué fruta es 'Banana'?", o: ["Manzana", "Banano", "Uva", "Pera"], a: 1 },
+        { q: "¿Cómo se dice 'Gracias'?", o: ["Hello", "Please", "Thank you", "Sorry"], a: 2 },
+        { q: "¿Qué animal es 'Elephant'?", o: ["León", "Elefante", "Mono", "Tigre"], a: 1 },
+        { q: "¿Cómo se dice 'Buen día'?", o: ["Good night", "Good morning", "Good bye", "Hello"], a: 1 },
+        { q: "¿Qué significa 'Book'?", o: ["Lápiz", "Cuaderno", "Libro", "Mesa"], a: 2 },
+        { q: "¿Cómo se dice 'Escuela'?", o: ["House", "School", "Park", "Hospital"], a: 1 },
+        { q: "¿Qué color es 'Purple'?", o: ["Morado", "Naranja", "Rosado", "Negro"], a: 0 }
+      ]
+    };
+
+    let currentUser = "";
+    let currentSubject = "";
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let selectedIdx = -1;
+
+    function goToHome() {
+      const name = document.getElementById('studentName').value;
+      if (name.trim().length < 3) { alert("Escribe tu nombre completo"); return; }
+      currentUser = name;
+      document.getElementById('loginView').classList.add('hidden');
+      document.getElementById('homeView').classList.remove('hidden');
+    }
+
+    function startSubject(subject) {
+      currentSubject = subject;
+      currentQuestionIndex = 0;
+      score = 0;
+      document.getElementById('homeView').classList.add('hidden');
+      document.getElementById('quizView').classList.remove('hidden');
+      document.getElementById('currentSubjectTitle').innerText = subject;
+      loadQuestion();
+    }
+
+    function loadQuestion() {
+      const questions = QUESTIONS_DB[currentSubject];
+      const qData = questions[currentQuestionIndex];
+      selectedIdx = -1;
+      
+      let html = `
+        <p class="text-indigo-500 font-bold mb-2">Pregunta ${currentQuestionIndex + 1} de 10</p>
+        <h2 class="text-2xl font-bold mb-6 text-gray-800 leading-tight">${qData.q}</h2>
+        <div class="grid gap-3">
+      `;
+      qData.o.forEach((opt, index) => {
+        html += `<div onclick="selectOption(${index})" id="opt-${index}" class="quiz-option p-4 rounded-xl font-medium shadow-sm">${opt}</div>`;
+      });
+      html += `</div>`;
+      
+      document.getElementById('quizContent').innerHTML = html;
+      document.getElementById('nextBtn').classList.add('hidden');
+    }
+
+    function selectOption(idx) {
+      selectedIdx = idx;
+      document.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
+      document.getElementById(`opt-${idx}`).classList.add('selected');
+      document.getElementById('nextBtn').classList.remove('hidden');
+    }
+
+    function nextQuestion() {
+      if (selectedIdx === QUESTIONS_DB[currentSubject][currentQuestionIndex].a) score++;
+      currentQuestionIndex++;
+      if (currentQuestionIndex < 10) loadQuestion();
+      else showResults();
+    }
+
+    function showResults() {
+      document.getElementById('quizView').classList.add('hidden');
+      document.getElementById('resultView').classList.remove('hidden');
+      document.getElementById('resultStudentName').innerText = currentUser;
+      document.getElementById('resultSubject').innerText = currentSubject;
+      document.getElementById('scoreDisplay').innerText = `${score} / 10`;
+    }
+
+    function backToHome() {
+      document.getElementById('quizView').classList.add('hidden');
+      document.getElementById('resultView').classList.add('hidden');
+      document.getElementById('homeView').classList.remove('hidden');
+    }
+
+    lucide.createIcons();
+  </script>
+</body>
+</html>
